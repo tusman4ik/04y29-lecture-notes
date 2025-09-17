@@ -20,12 +20,12 @@
     - `void`
 
 # Модификаторы:
-1. `signed/unsigned` - только для `char`, `int`
+1. `signed/unsigned` - только для `char`, `int`, `long long`
 2. `short` - для `int`
 3. `long` - для `double`, `int`
 
 ! Формально, `long double` и `long long (int)` -
-это отдельные типы данных, а не модификаторы для `double` и `int` !
+это отдельные типы данных, а не модификаторы для `double` и `int`. `long int` и  `short int` - все еще модификаторы!
 
 # Размеры типов
 1. В c++ типы не имеют фиксированной длины. В стандарте определено лишь неравенство.
@@ -33,7 +33,7 @@
 sizeof(short) ≤ sizeof(int) ≤ sizeof(long) ≤ sizeof(long long)
 sizeof(float) ≤ sizeof(double) ≤ sizeof(long double)
 ```
-2. В библиотеке `<cstdint>` определены типы с фиксированной точностью:
+2. В библиотеке [`<cstdint>`](https://en.cppreference.com/w/cpp/header/cstdint.html) определены типы с фиксированной точностью:
 - int8_t, int16_t, int32_t, int64_t - знаковые целые числа
 - uint8_t, uint16_t, uint32_t, uint64_t - беззнаковые
 3. Узнать количество байт, можно воспользоваться встроенным в язык оператором `sizeof(<var>)`. Библиотека ['numeric_limits'](https://en.cppreference.com/w/cpp/types/numeric_limits.html), которая определена в хедере `limits` (`#include <limits>`)позволяет узнать больше информации о типе, к примеру минимум, максимум, наименьшее положительное значение(для вещественных типов).
@@ -73,7 +73,7 @@ sizeof(float) ≤ sizeof(double) ≤ sizeof(long double)
 ## Явные
 1. Применяются с помощью кастов:
 ```cpp
-int a = (int)1.2f;
-int b = static_cast<int>(2.7);
+int a = (int)1.2f;             // -> 1
+int b = static_cast<int>(2.7); // -> 2
 ```
 2. Позволяют явно указать, к какому типу нужно привести значение, даже если происходит сужение или потеря данных.
