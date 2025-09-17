@@ -20,9 +20,8 @@ $\forall \epsilon > 0 \exists N \forall n \geq N |x_n - x_0| < \epsilon$  - оп
 - $\mathbb{C}$ - комплексные
 - $\mathbb{H}$ - ? (забей)
 - $\mathbb{O}$ - ? (забей)
-$$
-\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R} \subset \mathbb{C} \subset \mathbb{H} \subset \mathbb{O}
-$$
+
+$\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R} \subset \mathbb{C} \subset \mathbb{H} \subset \mathbb{O}$
 
 # Мощности множеств
 1. $|\mathbb{N}| = |\mathbb{Z}| =|\mathbb{Q}| < |\mathbb{R}|$ - про числовые множества
@@ -48,7 +47,7 @@ $+,\times: (x \in \mathbb{N}, y \in \mathbb{N}, z \in \mathbb{N})$
 - **Формальное определение:** $[x] = \{y \in A | yRx\}$
 - Классы эквивалентности разбивают множества на непересекающиеся подмножества $[x] \cap [y] \neq \varnothing \Rightarrow [x] = [y]$ 
 # Пытаемся определить натуральные числа
-1. Давайте назовем $\varnothing = 0$ (Пустое множество $\exists A \forall y \lnot(y \in A)$)
+1. Давайте назовем $\varnothing = 0$
 2. Определим $n+1$ число как $n \cup \{n\}$, т.е для $1$ это $\varnothing \cup \{\varnothing\}$
 3. Анологично определим все следующие натуральные числа
 
