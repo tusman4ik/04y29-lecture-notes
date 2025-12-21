@@ -1,3 +1,16 @@
+# Полезные ссылки: 
+- [Баллы по ASD](https://docs.google.com/spreadsheets/d/1bGFiA8Eo_DvWwFljG4edc0qvXsTRar_i4uNBJmT5bsw/edit?gid=1912560175#gid=1912560175)
+- [Баллы по FOP](https://docs.google.com/spreadsheets/d/1GTl2TBVT9YfGlgxQIdV7kKY6a2BRGWOhak8Hak2qGR4/edit?gid=1073736648#gid=1073736648)
+- [Баллы по DMT](https://docs.google.com/spreadsheets/d/1ioa07uZc3p1_mYloL2Q9qOKUoB0xMRf0FazWk7S8x7w)
+- [Баллы по MTA](https://docs.google.com/spreadsheets/u/0/d/1fgorOF58GTGqqGotcrEy-ApDqolgkyYoZhGi8Lgad_0/htmlview?pli=1#gid=0)
+- [Баллы по LAG](https://docs.google.com/spreadsheets/d/1diG6kbAqrQydG8pr27GNW5KFmlqpW0o81D3Os74mpd4/edit?gid=0#gid=0)
+- [Yonote ASD](https://dm-aisd.yonote.ru/share/itmo_dm_aisd)
+- [Overleaf MTA](https://www.overleaf.com/read/yvghqskxpjzb#f94883)
+- [Github SDT](https://github.com/RuslanKoynov/SDT_practice)
+- [Github DMT](https://github.com/Lipen/discrete-math-course?tab=readme-ov-file)
+- [Форма отчетов SDT](https://docs.google.com/forms/d/e/1FAIpQLSe4ARJjnWr00JMYkp8YmZE1868FizsS-vqggzz0nSjk0ydyxQ/viewform)
+- [Cloud MTA+LAG(от Бакеевой)](https://cloud.mail.ru/public/enTY/4HcyZiM5E)
+---
 # Правила работы с репозиторием.
 - коммитить в **master** ветку запрещено, все изменения только через pull request
 - весь нейминг на английском, но содержание на русском
