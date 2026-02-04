@@ -1,4 +1,4 @@
-#import "../lib.typ": *
+#import "main.typ": *
 
 
 #let tm-block-name(n, quest) = block(
