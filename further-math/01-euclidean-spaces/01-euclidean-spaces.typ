@@ -1,4 +1,4 @@
-#import "../typst-lib/main.typ": *
+#import "../../typst-lib/main.typ": *
 
 #set text(size: 14pt)
 
