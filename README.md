@@ -2,6 +2,7 @@
 
 - [Баллы по ASD](https://docs.google.com/spreadsheets/d/1bGFiA8Eo_DvWwFljG4edc0qvXsTRar_i4uNBJmT5bsw/edit?gid=1912560175#gid=1912560175)
 - [Баллы по FOP](https://docs.google.com/spreadsheets/d/1GTl2TBVT9YfGlgxQIdV7kKY6a2BRGWOhak8Hak2qGR4/edit?gid=1073736648#gid=1073736648)
+- [Баллы по HCS](https://docs.google.com/spreadsheets/d/1Fg8CyfE-FV7MlQK7UYd6pZMjm1zwF7B7aUvHGTa74i0/edit?usp=sharing)
 - [Баллы по DMT](https://docs.google.com/spreadsheets/d/1ioa07uZc3p1_mYloL2Q9qOKUoB0xMRf0FazWk7S8x7w)
 - [Баллы по MTA](https://docs.google.com/spreadsheets/u/0/d/1fgorOF58GTGqqGotcrEy-ApDqolgkyYoZhGi8Lgad_0/htmlview?pli=1#gid=0)
 - [Баллы по LAG](https://docs.google.com/spreadsheets/d/1diG6kbAqrQydG8pr27GNW5KFmlqpW0o81D3Os74mpd4/edit?gid=0#gid=0)
