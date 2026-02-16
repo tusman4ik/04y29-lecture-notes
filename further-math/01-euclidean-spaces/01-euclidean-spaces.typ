@@ -20,7 +20,9 @@
 
     *Примеры:*
     - $x, y in RR$, тогда $rho(x, y)=abs(x-y)$
-    - $x, y in RR^n$, тогда $dots$
+    - $x, y in RR^n$, тогда $rho(x, y) = sqrt(limits(sum)_(i=1)^n (x_i-y_i)^2)$
+
+    \*формула чуть-чуть отъехала, фикса скорее всего не будет\*
   ],
 )
 
@@ -37,7 +39,7 @@
     - Неравенство треугольника: $norm(x + y) <= norm(x) + norm(y)$
 
     *Пример:*\
-    $norm(x)_p = root(p, limits(sum)_(i=1)^n x_i^p)$, где
+    $norm(x)_p = root(p, limits(sum)_(i=1)^n x_i^p)$
   ],
 )
 
