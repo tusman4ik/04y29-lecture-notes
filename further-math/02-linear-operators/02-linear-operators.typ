@@ -27,6 +27,11 @@
     $
   ],
 )
+
+#fun-fact(
+  [С этого момента слово "оператор" должно быть заменено на "линейный оператор" (в голове, документ менять не обязательно)],
+)
+
 #def(
   [Линейное преобразование (пр-ва $V$)],
   [
@@ -114,5 +119,152 @@ $
   [Задание ЛО равносильно заданию его матрицы в фиксированной паре базисов],
   [
     TBD
+  ],
+)
+
+#def(
+  [Оператор поворота],
+  [
+    любой вектор в $RR^2$ можно задать как пару $(r, phi)$, где $x = (r cos phi, r sin phi)$. Чтобы повернуть его на угол $theta$ достаточно _ слева _ умножить этот вектор на матрицу
+    $
+      R_theta =
+      mat(
+        cos theta, -sin theta;
+        sin theta, cos theta
+      )
+    $
+    Посчитав, можно проверить что
+    $
+      R_theta dot vec(x_1, x_2) = mat(
+        cos theta, -sin theta;
+        sin theta, cos theta
+      ) dot vec(r cos phi, r sin phi) = vec(r cos(phi + theta), r sin (phi + theta))
+    $
+  ],
+)
+
+#notes-sub([Ядро и образ оператора], pgbreak: true)
+#def(
+  [Ядро],
+  [
+    для оператора $cal(A) : V -> W$ ядром будет называться множество $ker cal(A) subset.eq V$:
+    $
+      ker cal(A) = {x in V | cal(A)(x) = altvct(0)_W}
+    $
+  ],
+)
+#def(
+  [Образ],
+  [
+    для оператора $cal(A) : V -> W$ образом будет называться $op("Im") cal(A) subset.eq W$:
+    $
+      op("Im") cal(A) = {y in W | exists x in V : cal(A)(x) = y}
+    $
+  ],
+)
+
+#theorem(
+  [
+    Если есть линейный оператор $cal(A) : V -> W$, то
+    + $ker cal(A)$ --- подпространство $V$
+    + $op("Im") cal(A)$ --- подпространство $W$
+  ],
+  [
+    сам-но (что же она имела в виду?)
+  ],
+)
+
+#def(
+  [Дефект оператора],
+  [
+    дефектом оператора $cal(A) : V -> W$ называется размерность его ядра:
+    $
+      op("def") cal(A) = dim (ker cal(A))
+    $
+  ],
+)
+#def(
+  [Ранг оператора],
+  [
+    рангом оператора $cal(A) : V -> W$ называется размерность его образа:
+    $
+      op("rank") cal(A) = dim (op("Im") cal(A))
+    $
+  ],
+)
+
+#theorem(
+  [
+    Если $V$ конечномерно и определен оператор $cal(A) : V -> W$, то $ dim V = op("rank") cal(A) + op("def") cal(A) $
+  ],
+  [
+    Пусть $dim V = n, op("def") cal(A) = k$, $e = {e_1, e_2, dots, e_k}$ --- базис $ker cal(A)$. Дополним $e$ до базиса $V$:
+    $
+      e = {e_1, e_2, dots, e_k, e_(k+1), dots, e_n}
+    $
+    Докажем, что ${cal(A)(e_i) | i in [k+1, n]}$ --- базис $op("Im") cal(A)$.
+
+    Пусть $y in W, y = cal(A)(x)$, разложим $x$ по базису $e$:
+    $
+      x = limits(sum)_(i = 1)^n x_i e_i
+    $
+    тогда
+    $
+      & y = cal(A)(limits(sum)_(i = 1)^n x_i e_i) = limits(sum)_(i= 1)^n cal(A)(x_i e_i) = \
+      & limits(sum)_(i= 1)^n cal(A)(x_i) dot cal(A)(e_i) = limits(sum)_(i= 1)^n y_i cal(A)(e_i) = \
+      & limits(sum)_(i = 1)^k y_i underbracket(cal(A)(e_i), 0 "(ядро)") + limits(sum)_(i = k + 1)^n y_i cal(A)(e_i) = \
+      & altvct(0) + limits(sum)_(i = k + 1)^n y_i cal(A)(e_i) = limits(sum)_(i = k + 1)^n y_i cal(A)(e_i)
+    $
+
+    Докажем, что система векторов ${cal(A)(e_(k + 1)), dots, cal(A)(e_n)}$ ЛНЗ:
+
+    Пусть
+    $
+      & y_(k + 1) cal(A)(e_(k + 1)) + y_(k + 2) cal(A)(e_(k + 2)) + dots + y_n cal(A)(e_(n)) = 0 \
+      & cal(A)(y_(k + 1) e_(k + 1) + y_(k + 2) e_(k + 2) + dots + y_n e_n) = 0
+    $
+    тогда
+    $
+      v = y_(k + 1) e_(k + 1) + y_(k + 2) e_(k + 2) + dots + y_n e_n in ker cal(A)
+    $
+    разложим $v$ по $e$:
+    $
+      v = v_1 e_1 + v_2 e_2 + dots + v_k e_k
+    $
+    вычтем из первого определения второе:
+    $
+      underbracket(v_1 e_1 + v_2 e_2 + dots + v_k e_k, = v) - underbracket((y_(k + 1) e_(k + 1) + y_(k + 2) e_(k + 2) + dots + y_n e_n), =v) = 0
+    $
+    а из линейной независимости базиса $V$ имеем
+    $
+      v_1 = v_2 = dots =v_k = y_(k+1)=y_(k + 2) = dots= y_n = 0
+    $
+    а значит исходная система векторов так же ЛНЗ, то есть $ op("rank") cal(A) = dim(op("Im") cal(A)) = n - k $
+    откуда следует, что
+    $
+      n = k + (n - k)<==> dim V = op("rank") cal(A) + op("def") cal(A)
+    $
+  ],
+)
+
+
+#theorem(
+  [
+    Пусть задан оператор $cal(A) : V -> W$, $x = (x_1, x_2, dots, x_n)^T in V$ и его образ $y = (y_1, y_2, dots, y_m)^T in W$, тогда
+    $
+      y = A_(e -> u) x
+    $
+  ],
+  [
+    Разложим $x$ и $y$ по базису
+    $
+      & x = limits(sum)_(i = 1)^n x_i e_i \
+      & y = limits(sum)_(i = 1)^m y_i u_i
+    $
+    Рассмотрим
+    $
+      & y = cal(A)(x) = cal(A)(limits(sum)_(i = 1)^n x_i e_i) = limits(sum)_(i = 1)^n cal(A)(x_i e_i) = \
+      & limits(sum)_(i = 1)^n cal(A)(x_i) dot cal(A)(e_i) = limits(sum)_(i = 1)^n cal(A)(x_i) dot (limits(sum)_(j = 1)^m a_(i j)u_i)
+    $
   ],
 )
