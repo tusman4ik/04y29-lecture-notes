@@ -488,10 +488,11 @@ $
     Заметим, что $L_1 subset.eq L^perp$, т.к. $(forall x in L_1)(x perp L)$, покажем включение в другую сторону. Выберем $y in E$ с координатами $y_1, dots, y_n$, пусть $y perp L$, тогда $y perp {e_1, dots, e_k}$ (т.к. они принадлежат $L$), а значит, если $j in [1, k]$, то
     $
       & (y, e_j) = 0, "откуда" \
-      & (limits(sum)_(i=1)^k y_i e_i + underbracket(limits(sum)_(i=k+1)^n y_i e_i, 0), e_j) = 0 \
-      & y_j underbracket((e_j, e_j), 1) = 0 "(остальное зануляется из-за ортогональности)"
+      & ((limits(sum)_(i=1)^k y_i e_i + underbracket(limits(sum)_(i=k+1)^n y_i e_i, 0)), e_j) = 0 \
+      & (y_j e_j, e_j) = y_j underbracket((e_j, e_j), 1) = y_j \
+      & "(остальное зануляется из-за ортогональности)"
     $
-    то есть, $y = {0, 0, dots, e_(k+1), dots, e_n} <==> L^perp subset.eq L$, а значит $L^perp = L_1$
+    то есть, $y = {0, 0, dots, y_(k+1), dots, y_n} <==> L^perp subset.eq L$, а значит $L^perp = L_1$
   ],
 )
 
