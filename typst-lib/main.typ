@@ -79,7 +79,7 @@
   inset: 15pt,
   radius: 5pt,
   width: 100%,
-  fill: rgb("#adf7e6"),
+  stroke: imp-color,
 
   cont,
 ))
