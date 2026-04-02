@@ -837,7 +837,7 @@ _ Здесь определения будут поясняться на при�
       - Случай 2. Подграф $G[S_0 union.sq N(S_0)]$ удовлетворяет критерию Холла (мощность меньше $n$), а значит $exists M_1 : M_1$ покрывает $S_0$. Положим $G' := G - S_0 - N(S_0)$, $X' = X smn S_0$. Проверим критерий Холла для $G'$ и $X'$. Пусть $A subset.eq X ==> A inter S_0 = nothing$.
         - В $G$ (по критерию Холла) $N_G (A union.sq S_0) >= abs(A union.sq S_0) = abs(A) + abs(S_0)$
         - Но $N_G (A union.sq S_0) = N_G (A) union N_G (S_0)$
-        - Откуда $abs(N_G (A)) + underbracket(abs(N(S_0)), abs(S_0)) >= abs(N(A union.sq S_0)) >= abs(A) + abs(S_0) ==> abs(N_G (A)) >= abs(A)$
+        - Откуда $abs(N_G (A)) + underbracket(abs(N(S_0)), abs(S_0)) >= abs(N(A union.sq)) >= abs(A) + abs(S_0) ==> abs(N_G (A)) >= abs(A)$
         - Из определений следует, что $abs(N_G' (A)) = abs(N_G (A)) >= abs(A)$
         По индукции $exists M_2 : M_2$ покрывает $X'$. Откуда $M = M_1 union M_2$ покрывает $S_0 union X' = X$
   ],
