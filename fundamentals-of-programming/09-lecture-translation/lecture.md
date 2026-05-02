@@ -163,9 +163,9 @@ int main() {
 
 ```cpp
 int main() {
-	#define x 238;
+	#define x 238
 	std::cout << x; // OK
-	#undef x;
+	#undef x
 	std::cout << x; // CE: identifier "x" is undefined
 }
 ```
