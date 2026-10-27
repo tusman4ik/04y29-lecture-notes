@@ -555,3 +555,469 @@ $
     потом
   ],
 )
+
+#notes-header([Ряды Фурье], pgbreak: true)
+#notes-sub([Полезные определения])
+
+#def(
+  [Евклидово функциональное пространство],
+  [
+    пространство функций $E$, определенных на $[a, b]$ с опредленной на нем операцией скалярного произведения
+  ],
+)
+
+#fun-fact(
+  [ПОЧЕМУ ОНА ГДЕ-ТО ПИШЕТ $norm(dot)_2$ (ЗАЧЕМ 2)],
+)
+
+#fun-fact(
+  $
+    (f, g) = limits(integral)_a^b f(x) dot g(x) dif x quad f, g in L_2[a, b] \
+    norm(f) = sqrt((f, f))
+  $,
+)
+
+#theorem(
+  name: [Теорема (КБШ)],
+  [
+    Базовое неравенство
+    $
+      (f, g) <= norm(f) dot norm(g)
+    $
+  ],
+  [
+    Распишем по определению
+    $
+      limits(integral)_a^b f(x) dot g(x) dif x <= limits(integral)_a^b f(x) dif x dot limits(integral)_a^b g(x) dif x
+    $
+    при этом для произвольного $phi$ справедливо
+    $$$$
+  ],
+)
+
+#def(
+  [Гильбертово пространство],
+  [
+    полное по норме евклидово пространство (любая фундаментальная последовательность функций сходится)
+  ],
+)
+
+#def(
+  [Ортогональная система функций],
+  [
+    ${phi_n}_(n=1)^oo$, такая что
+    $
+      (forall n, m in NN)(n != m ==>(phi_n, phi_m) = 0)
+    $
+    Если
+    $
+      (forall n in NN)(norm(phi_n) =1)
+    $
+    то система называется *ортонормированной*
+  ],
+)
+
+#notes-sub([Ряды и коэффициенты Фурье], pgbreak: true)
+
+#def(
+  [Коэффициенты Фурье],
+  [
+    для ортогональной системы ${phi_n}$ и функции $f in L_2[a,b]$ значения
+    $
+      c_n = ((f, phi_n))/norm(phi_n)^2
+    $
+  ],
+)
+
+Попробуем приблизить $f in L_2[a, b]$ суммой $display(limits(sum)_(n=1)^N alpha_n phi_n (x))$, где ${phi_n}$ --- отогональная система, $alpha_n in RR$. Погрешностью приближения назовем квадрат нормы:
+$
+  delta_N = norm(f - limits(sum)_(n=1)^n alpha_n phi_n (x))^2
+$
+
+#theorem(
+  name: [Теорема об экстремалных свойствах коэффициентов Фурье],
+  [
+    $delta_N$ достигает своего минимума $<==> alpha_n = c_n$
+  ],
+  [
+    Обозначим
+    $
+      S_N (x) = limits(sum)_(n=1)^N alpha_n phi_n (x)
+    $
+    тогда
+    $
+      delta_N = (f - S_N, f - S_N) = norm(f)^2 - 2(f, S_N) + (S_N, S_N)
+    $
+    из ортогональности ${phi_n}$ и свойств скалярного произведения:
+    $
+      delta_N = norm(f)^2 - 2 limits(sum)_(n=1)^N alpha_n (f, phi_n) + limits(sum)_(n=1)^N alpha^2_n norm(phi_n)^2
+    $
+    из определения $c_n$:
+    $
+      c_n = ((f, phi_n))/norm(phi_n)^2 ==> (f, phi_n) = c_n norm(phi_n)^2
+    $
+    тогда
+    $
+      delta_N = norm(f)^2 + limits(sum)_(n=1)^N (alpha_n norm(phi_n))^2 - limits(sum)_(n=1)^N 2alpha_n norm(phi_n) dot c_n norm(phi_n) + limits(sum)_(n=1)^N (c_n norm(phi_n))^2 - limits(sum)_(n=1)^N (c_n norm(phi_n))^2
+    $
+    финт ушами:
+    $
+      delta_N = underbracket(norm(f)^2 - limits(sum)_(n=1)^N (c^2_n norm(phi_n))^2, = const) + underbracket(limits(sum)_(n=1)^N (alpha_n - c_n)^2 norm(phi_n), min "при" alpha_n=c_n)
+    $
+  ],
+)
+
+#theorem(
+  name: [Неравенство Бесселя],
+  [
+    $
+      norm(f)^2 >= limits(sum)_(n=1)^N c^2_n norm(phi_n)^2
+    $
+  ],
+  [
+    следует из определения $delta_N$ и преобразований в доказательстве прошлой теоремы:
+    $
+      delta_N >=0, quad delta_N = norm(f)^2 - limits(sum)_(n=1)^N (c^2_n norm(phi_n))^2
+    $
+    то есть
+    $
+      norm(f)^2 - limits(sum)_(n=1)^N (c^2_n norm(phi_n))^2 >= 0
+    $
+    равносильно
+    $
+      norm(f)^2 >= limits(sum)_(n=1)^N (c^2_n norm(phi_n))^2
+    $
+  ],
+)
+
+#def(
+  [Ряд Фурье],
+  [
+    рядом Фурье функции $f in L_2[a,b]$ по ортогональной системе ${phi_n}$ называется формальный ряд
+    $
+      f(x) ~ limits(sum)_(n=1)^oo c_n dot phi_n (x)
+    $
+    где $c_n$ --- коэффициенты Фурье
+  ],
+)
+
+#def(
+  [Замкнутая ортогональная система],
+  [
+    ортогональная система ${phi_n}$, в которой
+    $
+      (forall f in L^2[a, b])(underbracket(norm(f)^2 = limits(sum)_(n=1)^oo c^2_n norm(phi_n)^2, "равенство Парсеваля"))
+    $
+  ],
+)
+#def(
+  [Полная ортогональная система],
+  [
+    ортогональная система ${phi_n}$, в которой
+    $
+      (forall n in NN)((f, phi_n) = 0 ==> norm(f) = 0 #h(0.2em) (<==> f ~ 0))
+    $
+  ],
+)
+
+#theorem(
+  name: [Теорема Стеклова об эквивалентности замкнутости и полноты системы],
+  [
+    Система замкнута $<==>$ она полная
+  ],
+  [
+    - ($=>$). Пусть $f$ попарно ортогональна со всеми $phi_n$, тогда для $f$
+      #block(
+        width: 100%,
+        $
+          (forall n in NN)(c_n = 0)
+        $,
+      )
+      подставим в равенство Парсеваля, конец:
+      $
+        norm(f) = limits(sum)_(n=1)^oo c^2_n norm(phi_n)^2= limits(sum)_(n=1)^oo 0 dot norm(phi_n)^2 = 0
+      $
+    - ($arrow.double.l$). Обозначим (по сути $R_N = delta_N$)
+      $
+        R_N (x) = f(x) - limits(sum)_(n=1)^N c_n phi_n (x)
+      $
+      уже дважды использовался факт
+      $
+        norm(delta_N)^2 = norm(R_N)^2 = norm(f)^2 - limits(sum)_(n=1)^N c^2_n norm(phi_n)^2
+      $
+      если $norm(R_N)^2 -->_(N->oo) A != 0$, то получается, что $f$ ортогональна всем $phi_n$, но система полна, а значит такого быть не может, поэтому
+      $
+        lim_(N->oo) norm(R_N)^2 = 0
+      $
+      а значит переходя к пределу получаем то, что нужно
+      $
+        norm(f)^2 - limits(sum)_(n=1)^oo c^2_n norm(phi_n) = 0 <==> norm(f)^2 = limits(sum)_(n=1)^oo c^2_n norm(phi_n)
+      $
+  ],
+)
+
+// #notes-sub([Ортогонализация Грама-Шмидта], pgbreak: true)
+// Работает полностью аналогично ортогонализации базиса
+
+#notes-sub([Поточечная сходимость рядов Фурье], pgbreak: true)
+Мы уже знаем, что по норме ряд Фурье сходится к $f$:
+$
+  lim_(N->oo) norm(f-S_N) = 0
+$
+
+Теперь захотелось рассмотреть сходимость в каждой точке.
+
+Почему-то известно, что
+$
+  & a_0 = 1/pi dot limits(integral)_(-pi)^pi f(x) dif x \
+  & a_n = 1/pi dot limits(integral)_(-pi)^pi f(x) dot cos (n x) dif x \
+  & b_n = 1/pi dot limits(integral)_(-pi)^pi f(x) dot sin (n x) dif x \
+$
+в таком случае
+$
+  f(x) ~ a_0/2 + limits(sum)_(n=1)^oo a_n cos (n x) + b_n sin (n x)
+$
+и дискретный вариант:
+$
+  S_N (x) = a_0/2 + limits(sum)_(n=1)^N a_n cos (n x) + b_n sin (n x)
+$
+подставим $a_n$ и $b_n$:
+$
+  S_N (x) = 1/(2pi) dot limits(integral)_(-pi)^pi f(t) dif t + limits(sum)_(n=1)^N (1/pi dot limits(integral)_(-pi)^pi (f(t) dot cos (n t) dif t) dot cos (n x) + 1/pi dot limits(integral)_(-pi)^pi (f(t) dot sin (n t) dif t) dot sin (n x))
+$
+туда-сюда и получается
+$
+  S_N (x) = 1/pi dot limits(integral)_(-pi)^pi f(t) dot (1/2 + limits(sum)_(n=1)^N cos (n (t-x))) dif t
+$
+
+#def(
+  [Ядро Дирихле],
+  [
+    функция на $[-pi, pi]$:
+    $
+      D_N (u) = 1/2 + limits(sum)_(n=1)^N cos (n u)
+    $
+  ],
+)
+Из хитрого определения ядра Дирихле:
+$
+  S_N (x) = 1/pi dot limits(integral)_(-pi)^pi f(t) dot D_N (x-t) dif t
+$
+
+#theorem(
+  [
+    Для $u!= 2pi k quad k = 0, 1, 2, dots$ справедливо равенство
+    $
+      D_N (u) = (sin ((N + 1/2) u))/(2 sin u/2)
+    $
+  ],
+  [
+    Просто домножим на знаменатель:
+    $
+      & 2 sin u/2 dot D_N (u) = sin u/2 + 2 dot limits(sum)_(n=1)^N sin u/2 dot cos (n u) = \
+      & sin u/2 + limits(limits(sum))_(n=1)^N sin ((n + 1/2) u) - sin ((n-1/2)u) = \
+      & sin u/2 + sin ((N + 1/2) u) - sin u/2 = sin ((N + 1/2) u)
+    $
+    теперь достаточно обратно поделить:
+    $
+      D_N (u) = (sin ((N + 1/2) u))/(2 sin u/2)
+    $
+  ],
+)
+
+#fun-fact-headered(
+  [Свойства $D_N$],
+  [
+    + $lim_(u->0) D_N (u) = N + 1/2$
+    + Нормировка:
+      #block(
+        width: 100%,
+        $
+          1/pi dot limits(integral)_(-pi)^pi D_N (x) dif x = 1
+        $,
+      )
+      проверим:
+      $
+        & 1/pi dot limits(integral)_(-pi)^pi (1/2 + limits(sum)_(n=1)^N cos (n x))dif x = 1/pi dot limits(integral)_(-pi)^pi 1/2 dif x + limits(sum)_(n=1)^N (underbracket(limits(integral)_(-pi)^pi cos (n x) dif x, =0)) = 1/(2pi) dot 2 pi = 1
+      $
+    + Четность и $2pi$-периодичность:
+      $
+        D_N (-u) = D_N (u)
+      $
+    + Интеграл от модуля ядра на бесконечности ведет себя как $ln N$
+  ],
+)
+
+#theorem(
+  name: [Лемма Римана-Лебега],
+  [
+    Для $g(t) in R[a, b]$, тогда
+    $
+      lim_(lambda -> + oo) limits(integral)_a^b g(t) sin (lambda t) dif t = 0
+    $
+    и
+    $
+      lim_(lambda -> + oo) limits(integral)_a^b g(t) cos (lambda t) dif t = 0
+    $
+  ],
+  [
+    Рассмотрим 3 случая:
+    - $g(t) = C$, тогда
+    $
+      abs(limits(integral)_a^b C dot sin (lambda t) dif t) = lr((abs(C)/lambda abs(-cos (lambda t))) |)_a^b = abs(C)/lambda dot abs(cos (a lambda) - cos (b lambda)) -->_(lambda -> +oo) 0
+    $
+    - $g(t)$ --- ступенчатая на $[a, b]$, тогда интеграл превращается в конечную сумму интегралов от констант, а значит стремится к $0$ (см. п. 1)
+    - Все остальное. Из интегрируемости по Риману следует
+      $
+        exists phi (t) quad "(ступенчатая)"
+      $
+      такая, что
+      $
+        limits(integral)_a^b abs(g(t) - phi(t)) dif t < epsilon/2
+      $
+      $dots$
+  ],
+)
+
+#theorem(
+  name: [Принцип локализации Римана],
+  [
+    $f in R[a, b], x_0 in [-pi, pi]$. При $N -> +oo$, $S_N (x_0)$ зависит только от поведения $f(x)$ на сколь угодно малой $delta$ окрестности точки $x_0$
+  ],
+  [
+    Пусть $delta > 0$ и достаточно мало, тогда
+    $
+      & S_N (x_0) = 1/pi limits(integral)_(-pi)^pi f(t) dot D_N (t - x_0) dif t = \
+      & = 1/pi limits(integral)_(-pi)^pi f(u + x_0) dot D_N (u) dif u = \
+      & = 1/pi limits(integral)_(-delta)^delta (f(x_0 + u) dot D_N (u)) dif u + underbracket((limits(integral)_(-pi)^(-delta) + limits(integral)_delta^pi)(f(x_0 + u) dot D_N (u) dif u), ->0) =\
+    $
+    а значит
+    $
+      lim_(N -> +oo) S_N (x_0) = lim_(N -> +oo) (1/pi limits(integral)_(-delta)^delta (f(x_0 + u) dot D_N (u)) dif u)
+    $
+  ],
+)
+
+#theorem(
+  name: [Признак Дини (для поточечной сходимости)],
+  [
+    Пусть $f(x)$ --- $2pi$-периодичная функция, $x_0 in [-pi, pi]$, тогда ряд Фурье сходится исходному тогда и только тогда, когда сходится интеграл
+    $
+      limits(integral)_0^delta abs(f(x_0 + u) + f(x_0 - u) - 2S)/u dif u
+    $
+  ],
+  [gegege],
+)
+
+#def(
+  [Липшицева функция],
+  [
+    функция назвается Липшицевой порядка $alpha$\ ($0 < alpha <= 1$) в точке $x_0$, если
+    $
+      (exists L, delta > 0)(forall abs(u) < delta)(abs(f(x_0 + u) - f(x_0)) <= L dot abs(u)^alpha)
+    $
+  ],
+)
+
+#theorem(
+  name: [Признак Липшица],
+  [
+    Пусть $f$ липшицева в точке $x_0$, тогда
+    $
+      lim_(N-> +oo) S_N (x_0) = f(x_0)
+    $
+  ],
+  [
+    Пусть $S = f(x_0)$, проверим признак Дини:
+    $
+      abs(f(x_0 + u) - f(x_0 - u) - 2S)/u <= abs(f(x_0 + u) - f(x_0))/u + abs(f(x_0 - u) - f(x_0))/u = (*)
+    $
+    из липшицевости функции:
+    $
+      (*) <= (L u^alpha)/u + (L u^alpha)/u = 2L u^(alpha-1)
+    $
+    проинтегрируем:
+    $
+      limits(integral)_0^delta 2L u^(alpha - 1) dif u = (2L)/alpha dot delta^alpha
+    $
+    он сходится, а интеграл исходного уравнения не больше, чем полученный, значит сходится и он, то есть ряд Фурье сходится к $f$ (по Дини)
+  ],
+)
+
+#notes-sub([Сходимость в точках разрыва], pgbreak: true)
+
+#theorem(
+  [Пусть $x_0$ --- точка разрыва 1-го рода ($f$) пусть существуют односторонние пределы и производные, тогда $ S_N (x) -->_(N->+oo) (f(x_0 + 0) + f(x_0 - 0))/2 $ ],
+  [
+    gegege
+  ],
+)
+
+#fun-fact-headered(
+  [Явление (эффект) Гиббса],
+  [
+    Возле точки разрыва всегда немножко *торчит* (колебания сжимаются к целевой функции на промежутках непрерывности), то есть есть _ неуменьшаемый _ экстремум, который потом обычно "пересекает нужную функцию"
+  ],
+)
+
+#notes-sub([Связь хороших свойств функций и сходимости соответствующих рядов Фурье], pgbreak: true)
+
+#theorem(
+  [Пусть $f$ гладкая настолько, что $ exists f^((m)) (x) quad "и" quad f in C^((m-1)) [-pi, pi] $ тогда
+    $
+      & a_n = o(1/n^m) \
+      & b_n = o(1/n^m)
+    $ ],
+  [],
+)
+
+#pagebreak()
+
+$L_2^CC [a, b]$ --- комплекснозначные функции, интегрируемые на $[a, b]$.
+
+Скалярное произведение в таком пространстве определяется как
+$
+  (f, g) = limits(integral)_a^b f(x) dot overline(g(x)) dif x
+$
+
+#fun-fact-headered(
+  [Свойства (f, g)],
+  [
+    + Кососимметричность:
+      #block(
+        width: 100%,
+        $
+          (f, g) = overline((g, f))
+        $,
+      )
+    + Линейность по 1-му аргументу:
+      $
+        (alpha f + beta h, g) = alpha dot (f, g) + beta dot (h, g)
+      $
+    + Полулинейность по 2-му аргументу:
+      $
+        (f, alpha g) = overline(alpha) dot (f, g)
+      $
+    + Положительноопределнность нормы:
+      $
+        norm(f)^2 = (f, f) = limits(integral)_a^b f dot overline(f) dif x= limits(integral)_a^b abs(f(x))^2 dif x >= 0
+      $
+  ],
+)
+
+#notes-sub([Комплексные коэффициенты Фурье], pgbreak: true)
+
+#fun-fact(
+  [
+    $
+      c_n = 1/(2pi) limits(integral)_a^b f(x) dot e^(i n x) dif x = ((f, e^(i n x)))/norm(e^(i n x))^2
+    $
+  ],
+)
+
+Ну и еще один фактик
+
+$
+  f(x) ~ limits(sum)_(-oo)^(+oo) = c_n dot e^(i n x) = c_0 + limits(sum)_(n=1)^oo (c_n dot e^(i n x) + c(-n) dot e(-i n x))
+$
+
