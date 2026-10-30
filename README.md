@@ -2,6 +2,7 @@
 
 - [Баллы по AI](https://docs.google.com/spreadsheets/d/1zqIQOPIBkSzDlRd0MwFddr7pf9ewUF4AVU-dvUknAec/edit?clckid=1a5b398a&gid=0#gid=0)
 - [Баллы по БД](https://docs.google.com/spreadsheets/d/1Xolflxdz4c-kiO0BFuJtLkan552RzHc2ACgBDA37pnk/edit?usp=drivesdk)
+- [Баллы по ООП](https://docs.google.com/spreadsheets/d/1eOgF1TpjI1HTuVm1HG1byCP1VNkPF6CLvidxnj_Ql40/edit?gid=901245866#gid=901245866)
 - [Google Drive Теорвер](https://drive.google.com/drive/folders/1REgfOJnM48EHHccpw5iUNKSWT8sgHuLl)
 - [GitHub ООП](https://github.com/is-oop-y29-hassle-free)
 - [Мудл БЖД](https://lifesafety.itmo.ru/m)
