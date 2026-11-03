@@ -1,4 +1,4 @@
-#let imp-color = rgb("#02659f")
+#let imp-color = rgb("#004871")
 
 #let def(termin, definition) = align(center, block(
   inset: 15pt,
