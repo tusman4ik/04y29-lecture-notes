@@ -27,7 +27,7 @@
 #let theor-state(name: [Теорема], cont) = block(
   inset: 15pt,
   radius: 5pt,
-  // fill: rgb("#e9d7ff"),
+  fill: rgb("#e9d7ff"),
   width: 100%,
   stroke: rgb("#b47cf9"),
   [
