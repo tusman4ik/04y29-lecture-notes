@@ -117,7 +117,7 @@ $
 #fun-fact([Основные типы распределений],
 enum(
   numbering: "a)",
-  [Дискретное], [Непрерывное], [Их смеси]
+  [Дискретное], [Абсолютно непрерывное], [Их смеси]
 ))
 
 #pagebreak()
@@ -183,7 +183,7 @@ enum(
       [
         *Центральный момент.* Центральным моментом $xi$ порядка $k$ называется число
         $
-          mu_k = E(xi - E xi)^2 = sum_(i=1)^oo p_i dot (X_i - E xi)^2
+          mu_k = E(xi - E xi)^k = sum_(i=1)^oo p_i dot (X_i - E xi)^k
         $
         опять же при условии абсолютной сходимости этого ряда
       ]
@@ -438,4 +438,352 @@ enum(
 
 #fun-fact-uh(
   [На лекции так же была затронута #link("https://ru.wikipedia.org/wiki/Задача_о_разорении_игрока", "задача о разорении игрока"), возможно стоит посмотреть что это и разобраться там я хз (ссылка кликабельная должна быть, если что в исходниках можно найти либо просто загуглить и на википедию залезть)]
+)
+
+#pagebreak()
+
+== Непрерывные случайные величины
+
+#def(
+  [Функция распределения],
+  [
+    для случайной величины $xi$ функцией распределения будет функция
+    $
+      F_xi (x) = P(xi <= x)
+    $
+  ]
+)
+
+#def(
+  [Непрерывная случайная величина],
+  [
+    $xi$ называется непрерывной $<==>$ ее функция распределения непрерывна
+  ]
+)
+
+#theorem(
+  [
+    Если функция распределения непрерывна, то
+    $
+      forall a in RR quad P(xi = a) = 0
+    $
+  ],
+  [
+    Из непрерывности $F_xi (x)$ и вероятностной меры (снизу):
+    $
+      P(xi < a) = lim_(n->oo) P(xi <= a - 1/n) = F_xi (a - 0) = F_xi (a)
+    $
+    отсюда
+    $
+      P(xi = a) = P(xi <= a) - P(xi < a) = F_xi (a) - F_xi (a) = 0
+    $
+  ]
+)
+
+#pagebreak()
+
+== Абсолютно непрерывные случайные величины
+
+Предыдущий пункт был лирическим отступлением и вообще никому не нужен, поэтому перейдем к следующему.
+
+#def(
+  [Абсолютно непрерыная случайная величина],
+  [
+    величина $xi$, для которой существует измеримая *функция плотности* $f_xi : RR -> [0, + oo]$, такая что
+    $
+      F_xi (x) = limits(integral)_(-oo)^x f_xi (t) dif t
+    $
+  ]
+)
+
+Из определения $F_xi (x)$ здесь следует ее непрерывность $==>$ абсолютно непрерывная случайная величина всегда является непрерывной (во дела!)
+
+#fun-fact(
+  [Свойства функции плотности],
+  [
+    + *Неотрицательность* --- следует из определения
+    + *Нормировка.* Из определения $F_xi (x)$ (как функции распределения в целом), получаем
+      $
+        lim_(x -> +oo) F_xi (x) = 1,
+      $
+      а значит
+      $
+        limits(integral)_(-oo)^(+oo) f_xi (x) dif x = 1
+      $
+    + *Вероятность попадания в интервал:*
+      $
+        & P(a <= xi <= b) = F(b) - F(a) + P(xi = a) = F(b) - F(a) = \
+        & = limits(integral)_(-oo)^b f_xi (x) dif x - limits(integral)_(-oo)^a f_xi (x) dif x = limits(integral)_a^b f_xi (x) dif x
+      $
+    + *Связь с функцией распределения:* почти всюду (везде, кроме счетного числа точек) верно, что
+    $
+      F'_xi (x) = f_xi (x)
+    $
+  ]
+)
+
+#pagebreak()
+
+=== Числовые характеристики абсолютно непрерывной случайной величины
+
+*При существовании соответствующих интегралов (и совпадении определений моментов)*
+
+$
+  & E xi = limits(integral)_(-oo)^(+oo) x dot f(x) dif x \
+  & D xi = E xi^2 - (E xi)^2 \
+  & alpha_k = E xi^k = limits(integral)_(-oo)^(+oo) x^k dot f(x) dif x \
+  & mu_k = E (xi - E xi)^k \
+$
+
+#pagebreak()
+
+=== Стандартные абсолюно непрерывные распределения
+
+#enum(
+  numbering: "I.",
+  [
+    *Равномерное. $U(a, b)$.* Рассмотрим
+    $
+      f_xi (x) = cases(
+        0\, quad & x < a,
+        display(1/(b-a))\, quad & a <= x <= b,
+        0\, quad & x > b
+      )
+    $
+    Найдем $F_xi$, рассматриваем на $[a, b]$:
+    $
+      F_xi (x) = limits(integral)_(-oo)^x f_xi (t) dif t = limits(integral)_a^x f_xi (t) dif t = limits(integral)_a^x (dif t)/(b-a) = 1/(b-a) dot limits(integral)_a^x dif t = (x-a)/(b-a),
+    $
+    откуда
+    $
+      F_xi (x) = cases(
+        0\, quad & x < a,
+        display((x - a)/(b-a))\, quad & a <= x <= b,
+        0\, quad & x > b
+      )
+    $
+    Теперь матожидание:
+    $
+      & E xi =  limits(integral)_(-oo)^(+oo) x dot f_xi (x) dif x = limits(integral)_a^b x dot f(x) dif x = 1/(b-a) dot limits(integral)_a^b x dif x = \
+      & = 1/(b-a) dot (b^2 - a^2)/2 = ((b-a)dot (b+a))/(2 dot (b-a)) = (a + b)/2
+    $
+    Второй начальный момент:
+    $
+      & E xi^2 = limits(integral)_(-oo)^(+oo) x^2 dot f_xi (x) dif x = limits(integral)_a^b x^2 dot f_xi (x) dif x = 1/(b-a) dot limits(integral)_a^b x^2 dif x = \
+      & = 1/(b-a) dot (b^3 - a^3)/3 = ((b-a) dot (a^2 + a b + b^2))/(3 dot (b-a)) = (a^2 + a b + b^2)/3
+    $
+    И дисперсия:
+    $
+      & D xi = E xi^2 - (E xi)^2 = (a^2 + a b + b ^2)/3 - (a^2 + 2 a b + b^2)/4 = \
+      & = (4 a^2 + 4 a b + 4 b ^2 - 3 a^2 - 6 a b - 3 b^2)/12 = (a^2 - 2 a b - b ^2)/12 = \
+      & =  (a - b)^2/12 = (b-a)^2/12
+    $
+  ],
+  [
+    *Показательное. $E_alpha$.* Распределение с плотностью
+    $
+      f_xi (x) = cases(
+        0\, quad & x < 0,
+        alpha dot e^(-alpha x)\, quad & x >= 0
+      )
+    $
+    Рассмотрим $F_xi (x)$ на $[0, +oo]$:
+    $
+      & F_xi (x) = limits(integral)_(-oo)^x f_xi (t) dif t = limits(integral)_0^x f_xi (t) dif t = limits(integral)_0^x alpha dot e^(-alpha t) dif t = [dif (-alpha t) = -alpha dif t] = \
+      & = - limits(integral)_0^x e^(-alpha t) dif (-alpha t) = 1 - e ^(-alpha x)
+    $
+    Таким образом
+    $
+      F_xi (x) = cases(
+        0\, quad & x < 0,
+        1 - e^(-alpha x)\, quad & x >= 0
+      )
+    $
+    Теперь $E xi$:
+    $
+      E xi = limits(integral)_(-oo)^(+oo) x dot f_xi (x) dif x = limits(integral)_0^(+oo) x dot f_xi (x) dif x = limits(integral)_0^(+oo) alpha x dot e ^(-alpha x) dif x
+    $
+    Найдем интеграл
+    $
+      & limits(integral)_0^(+oo) t dot e^(-t) dif t = lim_(b -> +oo) (limits(integral)_0^b t dot e^(-t) dif t) = mat(
+        delim: "[",
+        u = t, dif u = dif t;
+        dif v = e^(-t) dif t, v = - e^(-t)
+      ) = \
+      & = lim_(b->+oo) (- t dot e^(-t) - limits(integral) - e^(-t) dif t)_0^b = lim_(b -> +oo) (-t dot e^(-t) - e^(-t))_0^b = \
+      & = lim_(b->+oo) (1 - b dot e^(-b) - e^(-b)) = 1
+    $
+    тогда
+    $
+      E xi = limits(integral)_0^(+oo) alpha x dot e^(-alpha x) dif x = 1/alpha dot underbracket(limits(integral)_0^(+oo) alpha x dot e^(-alpha x) dif (alpha x), =1) = 1/alpha
+    $
+    Найдем $E xi^2$:
+    $
+      E xi^2 = limits(integral)_(-oo)^(+oo) x^2 dot f_xi (x) dif x = limits(integral)_0^(+oo) x^2 dot f_xi (x) dif x = limits(integral)_0^(+oo) alpha x^2 dot e^(-alpha x) dif x
+    $
+    Найдем неопределенный интеграл
+    $
+      & integral t^2 e^(-t) dif t = mat(
+        delim: "[",
+        u = t^2, dif u = t dif t;
+        dif v = e^(-t) dif t, v = -e^(-t)
+      ) = - t^2 e^(-t) + integral 2 t e^(-t) dif t = \
+      & = -t^2 e^(-t) - 2t e^(-t) - 2 dot integral -e^(-t) dif t = -t^2 e^(-t) -2t e^(-t) - 2 e^(-t) + C= \
+      & = -e^(-t) dot (t^2 + 2t + 2) + C
+    $
+    Теперь найдем
+    $
+      limits(integral)_0^b t^2 e^(-t) dif t = - e^(-b) dot (b^2 + 2b + 2) + 2
+    $
+    и
+    $
+      & limits(integral)_0^(+oo) t^2 e^(-t) dif t = lim_(b -> +oo) (limits(integral)_0^b t^2 e^(-t) dif t) = lim_(b -> +oo) (2 - e^(-b) dot (b^2 + 2b + 2)) = 2\
+    $
+    Приведем исходный интеграл к такому виду:
+    $
+      E xi^2 = limits(integral)_0^(+oo) alpha x^2 dot e^(-alpha x) dif x = 1/alpha^2 dot limits(integral)_0^(+oo) (alpha x)^2 dot e(-alpha x) dif (alpha x) = 2/alpha^2
+    $
+    откуда
+    $
+      D xi = E xi^2 - (E xi)^2 = 2/alpha^2 - 1/alpha^2 = 1/alpha^2
+    $
+  ],
+  [
+    *Нормальное (гауссовское) распределение. $N(a, sigma^2)$.* Рассмотрим функцию плотности
+    $
+      f_xi (x) = 1/(sigma sqrt(2 pi)) dot e^(-(x-a)^2/(2sigma^2))
+    $
+    Здесь нам понадобится во второй раз познакомиться с функцией Гаусса (иногда $phi(x)$ --- плотность нормального распределения, а не функция Гаусса):
+    $
+      phi(x) = e^(-x^2)
+    $
+    и интеграллом Пуассона (Гаусса):
+    $
+      limits(integral)_(-oo)^(+oo) e^(-x^2) dif x
+    $
+    хочется его посчитать!
+    #fun-fact(
+      [Вычисление интеграла Пуассона],
+      [
+        Обозначим
+        $
+          I = limits(integral)_(-oo)^(+oo) e^(-x^2) dif x
+        $
+        тогда
+        $
+          I^2 = (limits(integral)_(-oo)^(+oo) e^(-x^2) dif x) dot (limits(integral)_(-oo)^(+oo) e^(-y^2) dif y)
+        $
+        Да, переменные неезависимы (если интегралы существуют), запишем как двойной интеграл (имеем право)
+        $
+          limits(integral)_(-oo)^(+oo) limits(integral)_(-oo)^(+oo) e^(-x^2) dot e^(-y^2) dif y dif x = limits(integral.double)_(RR^2) e^(-(x^2 + y^2)) dif x dif y
+        $
+        Теперь удобно перейти к полярным координатам:
+        $
+          cases(
+            x = rho cos phi,
+            y = rho sin phi
+          ) #h(2.5em) abs(J) = rho
+        $
+        Поскольку исходная область интегрирования $RR^2$, пределы интегрирования максимальны:
+        $
+          rho in [0, +oo) #h(2.5em) phi in [0, 2pi) #h(2.5em) D = [0, +oo) times [0, 2pi]
+        $
+        найдем двойной интеграл ($x^2 + y^2 = rho^2$):
+        $
+          & limits(integral.double)_(D) e^(-rho^2) dot abs(J) dif rho dif phi = limits(integral.double)_(D) rho e^(-rho^2) dif rho dif phi = limits(integral)_0^(2 pi) limits(integral)_0^(+oo) e^(-rho^2) rho dif rho dif phi = \
+          & = ["поскольку внутренний интеграл не зависит от" phi ] = \
+          & = limits(integral)_0^(2pi) dif phi dot limits(integral)_(0)^(+oo) e^(-rho^2) rho dif rho = [rho dif rho = - 1/2 dif (-rho^2)] = -2pi dot 1/2 dot limits(integral)_0^(+oo) e^(-rho^2) dif (-rho^2) = \
+          & = -pi limits(integral)_0^(-oo) e^t dif t = pi dot limits(integral)_(-oo)^0 e^t dif t = (*)
+        $
+        посчитаем интеграл
+        $
+          limits(integral)_a^0 e^t dif t = 1 - e^a
+        $
+        откуда
+        $
+          limits(integral)_(-oo)^0 e^t dif t = lim_(a -> -oo) (limits(integral)_a^0 e^t dif t) = lim_(a -> -oo) (1 - e^a) = 1
+        $
+        то есть
+        $
+          (*) = pi dot 1 = pi
+        $
+        откуда
+        $
+          I^2 = pi ==> I = sqrt(pi)
+        $
+        (поскольку $phi(x)$ неотрицательна на $RR$)
+      ]
+    )
+    Теперь мы знаем значение интеграла Пуассона:
+    $
+      limits(integral)_(-oo)^(+oo) phi (x) dif x = sqrt(pi)
+    $
+    Найдем в общем случае $F_xi (x)$ выразить невозможно, поэтому рассмотрим функцию распределения в стандартном нормальном распределении $N(0, 1)$ --- *функцию Лапласа*
+    $
+      Phi(x) = 1/sqrt(2pi) limits(integral)_(-oo)^x e^(-(t^2)/2) dif t
+    $
+    в общем случае значение этой функции можно найти через интеграл Пуассона (через аддитивность по пределам интегрирования), но в мире существуют таблицы значений этой функции, поэтому считать ее руками вам почти наверняка не придется.
+
+    Так вот, $F_xi (x)$:
+    $
+      & F_xi (x) = limits(integral)_(-oo)^(+oo) f_xi (x) dif x = limits(integral)_(-oo)^(oo) 1/(sigma sqrt(2pi)) dot e^(-(x-a)^2/(2 sigma^2)) dif x = \
+      & = [t = (x-a)/(sigma) quad dif t = (dif x)/(sigma) ==> dif x = sigma dif t] = \
+      & = limits(integral)_(-oo)^(+oo) (sigma)/(sigma sqrt(2 pi)) dot e^(-t^2/2) dif t = 1/sqrt(2pi) dot limits(integral)_(-oo)^(+oo) e^(-t^2/2) dif t = 1/sqrt(2pi) dot Phi(t) = \
+      & = 1/sqrt(2pi) dot Phi((x-a)/sigma)
+    $
+
+    Теперь матожидание:
+    $
+      & E xi = limits(integral)_(-oo)^(+oo) x dot f_xi (x) dif x = limits(integral)_(-oo)^(+oo) x dot 1/(sigma sqrt(2pi)) dot e^(-(x-a)^2/(2 sigma^2)) dif x = \
+      & = [t = (x-a)/(sqrt(2) sigma) ==> x = sqrt(2) sigma t + a quad dif t = (dif x)/(sqrt(2) sigma) ==> dif x = sqrt(2) sigma dif t] = \
+      & = limits(integral)_(-oo)^(+oo) (sqrt(2) sigma t + a) dot (sqrt(2) sigma)/(sigma sqrt(2pi)) dot e^(-t^2) dif t = (sqrt(2) sigma)/sqrt(pi) dot underbracket(limits(integral)_(-oo)^(+oo) t dot e^(-t^2) dif t, I_1) + a/sqrt(pi) dot underbracket(limits(integral)_(-oo)^(+oo) e^(-t^2) dif t, I_2)
+    $
+    Посчитаем оба интеграла отдельно:
+    $
+      I_1 = limits(integral)_(-oo)^(+oo) t dot e^(-t^2)
+    $
+    заметим, что подынтегральная функция нечетна, а промежуток интегрирования симметричный $==> I_1 = 0$.
+
+    Теперь рассмотрим $I_2$ --- это просто интеграл Пуассона $==> I_2 = sqrt(pi)$. Подставим в $E xi$:
+    $
+      E xi = (sqrt(2) sigma)/sqrt(pi) dot 0 + a/sqrt(pi) dot sqrt(pi) = 0 + a = a
+    $
+
+    Теперь посчитаем $E xi^2$:
+    $
+      & E xi^2 = limits(integral)_(-oo)^(+oo) x^2 dot f_xi (x) = limits(integral)_(-oo)^(+oo) x^2 dot 1/(sigma sqrt(2i)) e^(-(x-a)^2/(2 sigma^2)) dif x = \
+      & = [t = (x-a)/(sqrt(2) sigma) ==> x^2 = (sqrt(2)sigma t + a)^2 quad dif t = (dif x)/(sqrt(2) sigma) ==> dif x = sqrt(2) sigma dif t] = \
+      & = limits(integral)_(-oo)^(+oo) (sqrt(2) sigma t + a)^2 dot (sqrt(2) sigma)/(sigma sqrt(2pi)) dot e^(-t^2) dif t = limits(integral)_(-oo)^(+oo) (2 sigma^2 t^2 + 2sqrt(2)sigma  a t+ a^2)/(sqrt(pi)) dot e^(-t^2) = \
+      & = (2sigma^2)/sqrt(pi) dot underbracket(limits(integral)_(-oo)^(+oo) t^2 dot e^(-t^2) dif t, = I)  + (2 sqrt(2) sigma a)/sqrt(pi) dot underbracket(limits(integral)_(-oo)^(+oo) t dot e^(-t^2) dif t, =0 "(подынтегральная"\ "функция нечетна)") + a^2/sqrt(pi) dot underbracket(limits(integral)_(-oo)^(+oo) e^(-t^2) dif t, =sqrt(pi) "(интеграл"\ "Пуассона)") = \
+      & = (2 sigma^2)/sqrt(pi) dot I + (2 sqrt(2) sigma a)/sqrt(pi) dot 0 + a^2/sqrt(pi) dot sqrt(pi) =  (2 sigma^2)/sqrt(pi) dot I + 0 + a^2 =  (2 sigma^2)/sqrt(pi) dot I + a^2
+    $
+    Посчитаем $I$:
+    $
+      & I = limits(integral)_(-oo)^(+oo) t^2 dot e^(-t^2) dif t
+    $
+    Найдем неопределенный интеграл
+    $
+      & integral t^2 e^(-t^2) dif t = mat(
+        delim: "[",
+        column-gap: #(0% + 1.5em),
+        align: #left,
+        u = t, dif u = dif t;
+        dif v = t e^(-t^2) dif t, v = -1/2 e^(-t^2)
+      ) = \
+      & = -t/2 e^(-t^2) + 1/2 integral e^(-t^2) dif t
+    $
+    Подставим:
+    $
+      & I = (-t/2 e^(-t^2) + 1/2 integral e^(-t^2) dif t)_(-oo)^(+oo) = (-t/2 e^(-t^2))_(-oo)^(+oo) + 1/2 underbracket(limits(integral)_(-oo)^(+oo) e^(-t^2) dif t, "интеграл"\ "Пуассона") = \
+      & = -1/2 dot underbracket((lim_(t -> +oo) t dot e^(-t^2) - lim_(t -> -oo) t dot e^(-t^2)), = (0 - 0) = 0) + sqrt(pi)/2 = sqrt(pi)/2
+    $
+    И в $E xi^2$:
+    $
+      E xi^2 = (2 sigma^2)/sqrt(pi) dot I + a^2 = (2 sigma^2)/sqrt(pi) dot sqrt(pi)/2 + a^2 = sigma^2 + a^2
+    $
+    Теперь дисперсия:
+    $
+      D xi = E xi^2 - (E xi)^2 = sigma^2 + a^2 - a^2 = sigma^2
+    $
+  ]
 )
