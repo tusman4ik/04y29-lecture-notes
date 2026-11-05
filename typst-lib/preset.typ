@@ -10,7 +10,7 @@
 }
 
 #show heading: it => {
-  block(below: 10pt, align(center, text(fill: imp-color, it)))
+  block(below: 20pt, align(center, text(fill: imp-color, it)))
 }
 
 #show heading.where(level: 1): it => {
